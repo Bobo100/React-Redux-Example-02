@@ -6,6 +6,9 @@ export const store = configureStore({
     reducer: {
         async
     },
+    // 預設就是true，但是如果你要自己設定的話，可以這樣寫(根本沒影響 除非你要關閉)
+    // 關閉就會
+    // Error: Actions must be plain objects. Use custom middleware for async actions.
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         thunk: true
     })

@@ -2,7 +2,7 @@ import Head from "next/head";
 import Layout from '../components/layout';
 import { useAppDispatch, useAppSelector } from "../components/redux/hook/hook";
 import { useEffect, useState } from "react";
-import { fetchFirstData, setDataTitle } from "../components/redux/slice/asyncSlice";
+import { fetchFirstData, fetchUsers, setDataTitle, timeoutChange } from "../components/redux/slice/asyncSlice";
 
 function HomePage() {
 
@@ -13,8 +13,20 @@ function HomePage() {
     const asyncData = useAppSelector((state) => state.async)
 
     useEffect(() => {
-        dispatch(setDataTitle())
+        dispatch(fetchFirstData())
     }, [])
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await dispatch(fetchUsers());
+            } catch (err) {
+            }
+        };
+        fetchData();
+    }, []);
+
 
     console.log(asyncData)
 
@@ -25,7 +37,7 @@ function HomePage() {
             </Head>
             <div className="flex flex-col items-center">
                 <h1 className="text-3xl mt-3">新版Redux用法</h1>
-                <h2 className="text-2xl mt-3">範例一 (非同步資料)</h2> 
+                <h2 className="text-2xl mt-3">範例一 (非同步資料)</h2>
                 <div className="border border-title p-5 m-3">
                     <div>asyncData userId: {asyncData.userId}</div>
                     <div>asyncData id: {asyncData.id}</div>
@@ -33,6 +45,8 @@ function HomePage() {
                     <div>asyncData completed: {`${asyncData.completed}`}</div>
                     <div>asyncData isLoading: {`${asyncData.isLoading}`}</div>
                 </div>
+
+                <button className="border p-2 rounded border-title hover:bg-title hover:text-black mt-5" onClick={() => dispatch(timeoutChange("Hello World"))}>改變title</button>
 
                 <a href="https://react-redux-neon.vercel.app/useReduxOfficial" rel="noopener" target="_blank" className="border p-2 rounded border-title hover:bg-title hover:text-black mt-5">回去學習~</a>
             </div>
