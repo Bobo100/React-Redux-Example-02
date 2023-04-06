@@ -2,7 +2,7 @@ import Head from "next/head";
 import Layout from '../components/layout';
 import { useAppDispatch, useAppSelector } from "../components/redux/hook/hook";
 import { useEffect, useState } from "react";
-import { fetchFirstData } from "../components/redux/slice/asyncSlice";
+import { fetchFirstData, setDataTitle } from "../components/redux/slice/asyncSlice";
 
 function HomePage() {
 
@@ -13,7 +13,7 @@ function HomePage() {
     const asyncData = useAppSelector((state) => state.async)
 
     useEffect(() => {
-        dispatch(fetchFirstData());
+        dispatch(setDataTitle())
     }, [])
 
     console.log(asyncData)
