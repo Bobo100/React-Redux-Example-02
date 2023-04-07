@@ -76,7 +76,7 @@ export const asyncSlice = createSlice({
 })
 export const { setDataTitle, getUsersStart, getUsersSuccess, getUsersFailure } = asyncSlice.actions
 
-export const selectDataTitle = (state: RootState) => state.async.title
+// export const selectDataTitle = (state: RootState) => state.async.title
 
 export const fetchUsers = () => async (dispatch: Dispatch<AnyAction>) => {
     try {
