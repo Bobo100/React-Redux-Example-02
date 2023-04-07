@@ -2,7 +2,8 @@ import Head from "next/head";
 import Layout from '../components/layout';
 import { useAppDispatch, useAppSelector } from "../components/redux/hook/hook";
 import { useEffect, useState } from "react";
-import { fetchFirstData, fetchUsers, setDataTitle, timeoutChange } from "../components/redux/slice/asyncSlice";
+import { fetchFirstData, fetchUsers, selectAsync, setDataTitle, timeoutChange } from "../components/redux/slice/asyncSlice";
+import uuid from "react-uuid";
 
 function HomePage() {
 
@@ -10,25 +11,29 @@ function HomePage() {
     const dispatch = useAppDispatch()
 
     // 第三個slice
-    const asyncData = useAppSelector((state) => state.async)
+    const asyncData = useAppSelector(selectAsync)
 
     useEffect(() => {
         dispatch(fetchFirstData())
     }, [])
 
-
+    const [user, setUser] = useState([])
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const data = await dispatch(fetchUsers());
+                setUser(data)
             } catch (err) {
+                console.log("err：", err)
             }
         };
         fetchData();
     }, []);
 
-
-    console.log(asyncData)
+    useEffect(() => {
+        console.log("render ")
+        console.log(asyncData)
+    })
 
     return (
         <Layout>
@@ -49,6 +54,23 @@ function HomePage() {
                 <button className="border p-2 rounded border-title hover:bg-title hover:text-black mt-5" onClick={() => dispatch(timeoutChange("Hello World"))}>改變title</button>
 
                 <a href="https://react-redux-neon.vercel.app/useReduxOfficial" rel="noopener" target="_blank" className="border p-2 rounded border-title hover:bg-title hover:text-black mt-5">回去學習~</a>
+
+                {user && (<>
+                    <h2 className="text-2xl mt-3">範例二 (同步資料)</h2>
+                    <div className="border border-title p-5 m-3">
+                        {user.map((item, index) => {
+                            return (
+                                <div key={uuid()}>
+                                    <div>id: {item.id}</div>
+                                    <div>name: {item.name}</div>
+                                    <div>username: {item.username}</div>
+                                    <div>email: {item.email}</div>
+                                    <div>phone: {item.phone}</div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </>)}
             </div>
         </Layout>
     )

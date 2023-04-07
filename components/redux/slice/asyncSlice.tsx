@@ -44,11 +44,12 @@ export const asyncSlice = createSlice({
         },
         getUsersSuccess(state, action) {
             state.isLoading = false;
-            state.title = action.payload;
+            // 要根據你的fetch回來的資料來決定要怎麼寫 否則會出錯喔~
+            state.title = action.payload[0].name;
         },
-        getUsersFailure(state, action) {
+        getUsersFailure(state) {
             state.isLoading = false;
-            state.title = action.payload;
+            state.title = "error"
         },
     },
     extraReducers: (builder) => {
@@ -76,14 +77,15 @@ export const asyncSlice = createSlice({
 })
 export const { setDataTitle, getUsersStart, getUsersSuccess, getUsersFailure } = asyncSlice.actions
 
-// export const selectDataTitle = (state: RootState) => state.async.title
+export const selectAsync = (state: RootState) => state.async
 
 export const fetchUsers = () => async (dispatch: Dispatch<AnyAction>) => {
     try {
         dispatch(getUsersStart());
         const response = await fetch('https://jsonplaceholder.typicode.com/users');
         const data = await response.json();
-        dispatch(getUsersSuccess(data[0].name));
+        dispatch(getUsersSuccess(data));
+        return data;
     } catch (error) {
         console.log(error)
         dispatch(getUsersFailure(error.message));
