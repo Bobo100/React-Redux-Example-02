@@ -12,6 +12,7 @@ function HomePage() {
                 <h1 className="text-xl">透過一些範例來看看 非同步的情況</h1>
                 <Link href="/Async" className="border border-title p-3 m-3">前往範例一</Link>
                 <Link href="/Async2" className="border border-title p-3 m-3">前往範例二</Link>
+                <Link href="/Async3" className="border border-title p-3 m-3">前往範例三</Link>
             </div>
 
         </Layout>
