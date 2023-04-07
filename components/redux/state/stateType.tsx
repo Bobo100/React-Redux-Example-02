@@ -1,16 +1,35 @@
 /////////////////////////////////////// 第三個State 非同步
 export interface AsyncState {
-    userId: number
     id: number
-    title: string
-    completed: boolean
-    isLoading: boolean    
+    username: string
+    email: string
+    address: {
+        street: string
+        suite: string
+        city: string
+        zipcode: string
+        geo: {
+            lat: string
+            lng: string
+        }
+    }
 }
 
-export const asyncInitialState: AsyncState = {
-    userId: 0,
-    id: 0,
-    title: '',
-    completed: true,
-    isLoading: false
+export interface AsyncStateList {
+    AsyncStateList: AsyncState[],
+    isLoaded: boolean
+    isComplete: boolean
 }
+
+export const asyncInitialState: AsyncStateList = {
+    AsyncStateList: [],
+    isLoaded: false,
+    isComplete: false
+}
+
+export const asyncInitialState2: AsyncStateList = {
+    AsyncStateList: [],
+    isLoaded: false,
+    isComplete: false
+}
+

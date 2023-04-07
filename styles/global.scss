@@ -3,8 +3,13 @@
 // @import "tailwindcss/utilities";
 
 $navbar-height: 80px;
-$bacground-color: #0f1114;
+$bacground-color: #282c34;
 $color: #61dafb;
+$navbar-bg-color: #0f1114;
+
+* {
+    box-sizing: border-box;
+}
 
 .navbar {
     position: fixed;
@@ -46,5 +51,22 @@ button {
     &:hover {
         background-color: $color;
         color: $bacground-color;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: #61dafb;
+
+    border: 1px solid #61dafb;
+    padding: 10px;
+
+    display: inline-block;
+
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        background-color: #61dafb;
+        color: $navbar-bg-color;
     }
 }
