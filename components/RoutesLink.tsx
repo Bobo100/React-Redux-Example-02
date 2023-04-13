@@ -9,6 +9,7 @@ const RouterLink = () => {
             <Link href="/Async" className={router.pathname === "/Async" ? "active" : ""}>前往範例一</Link>
             <Link href="/Async2" className={router.pathname === "/Async2" ? "active" : ""}>前往範例二</Link>
             <Link href="/Async3" className={router.pathname === "/Async3" ? "active" : ""}>前往範例三</Link>
+            <Link href="/User" className={router.pathname === "/User" ? "active" : ""}>前往範例四</Link>
         </>
     )
 }
