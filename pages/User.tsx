@@ -59,7 +59,7 @@ const User = () => {
                 <p>年齡</p>
                 <input className="p-2 m-2" type="number" id="age" onChange={handleAge} placeholder="age" />
 
-                <p>由於我們有設定addMachter 所以有額外的規則</p>
+                <p>由於我們有設定addMatcher 所以有額外的規則</p>
                 <p>{` action => action.type === 'users/addUser' && action.payload.user.age > 18, // 條件：新增用戶的年齡大於18歲 `}</p>
                 <button className="p-2 m-2" onClick={addUser}>新增</button>
             </div>
